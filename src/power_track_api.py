@@ -24,7 +24,8 @@ def post_stringpv_data(user_id: int, data: List[StringPVData]):
     # Converte os objetos StringPVData para dicionários antes de enviar
     payload = {
         "user_id": user_id,
-        "batch": [pv_data.dict() for pv_data in data]
+        "batch": [pv_data.dict() for pv_data in data],
+        # token: user.growatt_token
     }
     
     response = requests.post(f"{BASE_URL}/stringpv/batch", json=payload)

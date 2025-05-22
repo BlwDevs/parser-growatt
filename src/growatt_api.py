@@ -41,7 +41,7 @@ def get_last_data(user: GrowattUser) -> List[StringPVData]:
     response.raise_for_status()
     
     # Obtém os dados do primeiro inversor da lista
-    raw_data = response.json()["data"]["min"][0]
+    raw_data = response.json()["data"][user.device_type][0]
     timestamp = datetime.strptime(raw_data["time"], "%Y-%m-%d %H:%M:%S")
 
     # Processa os dados das strings (considerando até 4 strings possíveis)
@@ -55,7 +55,7 @@ def get_last_data(user: GrowattUser) -> List[StringPVData]:
             string_data.append(
                 StringPVData(
                     timestamp=timestamp,
-                    index=i-1,
+                    index=1, # índice fixo para o inversor *por enquanto*
                     string_number=i,
                     ppv=float(ppv),
                     ipv=float(ipv),
