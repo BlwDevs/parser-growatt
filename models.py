@@ -17,6 +17,6 @@ class GrowattUser(BaseModel):
     id: int
     api_token: str
     sn: str
-    device_type: Optional[str] = "min"
+    device_type: str
     inverter_id: int  # mapeado previamente
     growatt_token: str  # token para acessar a API da Growatt
