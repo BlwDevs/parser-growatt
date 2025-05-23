@@ -14,9 +14,10 @@ class StringPVData(BaseModel):
     inverter_id: int
 
 class GrowattUser(BaseModel):
-    id: int
-    api_token: str
-    sn: str
-    device_type: str
+    id: int #id do UserParserInverter
+    api_token: str # token para acessar a API da Growatt
+    sn: str # serial number do inversor
+    device_type: str # tipo do dispositivo
     inverter_id: int  # mapeado previamente
     growatt_token: str  # token para acessar a API da Growatt
+    stringsNum: int  # número de strings do inversor

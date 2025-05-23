@@ -6,7 +6,8 @@ import os
 BASE_URL = os.getenv('POWER_TRACK_API_URL', 'http://localhost:8080')
 
 def fetch_users() -> List[GrowattUser]:
-    response = requests.get(f"{BASE_URL}/userparser/growatt")
+    #enviar token para autenticar parser
+    response = requests.get(f"{BASE_URL}/user-parser/growatt")
     response.raise_for_status()
     data = response.json()
     
@@ -27,7 +28,7 @@ def post_stringpv_data(user_id: int, data: List[StringPVData]):
         "batch": [pv_data.dict() for pv_data in data],
         # token: user.growatt_token
     }
-    
+    #enviar token para autenticar parser
     response = requests.post(f"{BASE_URL}/stringpv/batch", json=payload)
     response.raise_for_status()
     return response.json()

@@ -45,7 +45,7 @@ def get_last_data(user: GrowattUser) -> List[StringPVData]:
     timestamp = datetime.strptime(raw_data["time"], "%Y-%m-%d %H:%M:%S")
 
     # Processa os dados das strings (considerando até 4 strings possíveis)
-    for i in range(1, 5):
+    for i in range(1, user.stringsNum+1):
         vpv = raw_data.get(f"vpv{i}", 0.0)
         ipv = raw_data.get(f"ipv{i}", 0.0)
         ppv = raw_data.get(f"ppv{i}", 0.0)
