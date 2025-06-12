@@ -5,7 +5,7 @@ from typing import Optional
 
 
 class StringPVData(BaseModel):
-    timestamp: datetime
+    timestamp: str
     index: int
     string_number: int
     ppv: float
@@ -19,5 +19,4 @@ class GrowattUser(BaseModel):
     sn: str # serial number do inversor
     device_type: str # tipo do dispositivo
     inverter_id: int  # mapeado previamente
-    growatt_token: str  # token para acessar a API da Growatt
     stringsNum: int  # número de strings do inversor

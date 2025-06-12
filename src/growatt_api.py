@@ -42,8 +42,7 @@ def get_last_data(user: GrowattUser) -> List[StringPVData]:
     
     # Obtém os dados do primeiro inversor da lista
     raw_data = response.json()["data"][user.device_type][0]
-    timestamp = datetime.strptime(raw_data["time"], "%Y-%m-%d %H:%M:%S")
-
+    timestamp = raw_data["time"]
     # Processa os dados das strings (considerando até 4 strings possíveis)
     for i in range(1, user.stringsNum+1):
         vpv = raw_data.get(f"vpv{i}", 0.0)
