@@ -21,4 +21,5 @@ services:
 
 networks:
   power-track-network:
-    driver: bridge
+    external: true  # <- tornar a rede compartilhada
+

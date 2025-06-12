@@ -11,12 +11,12 @@ def job():
     for user in users:
         try:
             growatt_data: List[StringPVData] = get_last_data(user)
-            post_stringpv_data(user.id, growatt_data)
+            #post_stringpv_data(growatt_data)
         except Exception as e:
             print(f"Erro com o usuário {user.id}: {str(e)}")
 
 def schedule_job():
-    schedule.every(5).minutes.do(job)
+    schedule.every(5).seconds.do(job)
     print("Worker iniciado, executando a cada 5 minutos...")
 
     while True:

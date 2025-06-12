@@ -3,11 +3,11 @@ from typing import List
 from models import GrowattUser, StringPVData
 import os
 
-BASE_URL = os.getenv('POWER_TRACK_API_URL', 'http://localhost:8080')
+BASE_URL = os.getenv('POWER_TRACK_API_URL', 'http://localhost:8080/api/v1')
 
 def fetch_users() -> List[GrowattUser]:
     #enviar token para autenticar parser
-    response = requests.get(f"{BASE_URL}/user-parser/growatt")
+    response = requests.get(f"http://go_app:8080/api/v1/user-parser/growatt")
     response.raise_for_status()
     data = response.json()
     
@@ -15,7 +15,7 @@ def fetch_users() -> List[GrowattUser]:
     users = [GrowattUser(**user) for user in data["data"]]
     return users
 
-def post_stringpv_data(user_id: int, data: List[StringPVData]):
+def post_stringpv_data(data: List[StringPVData]):
     """
     Envia um lote de dados StringPV para a API.
     Args:
@@ -23,11 +23,7 @@ def post_stringpv_data(user_id: int, data: List[StringPVData]):
         data: Lista de dados StringPV para enviar em lote
     """
     # Converte os objetos StringPVData para dicionários antes de enviar
-    payload = {
-        "user_id": user_id,
-        "batch": [pv_data.dict() for pv_data in data],
-        # token: user.growatt_token
-    }
+    payload = [item.dict() for item in data]
     #enviar token para autenticar parser
     response = requests.post(f"{BASE_URL}/stringpv/batch", json=payload)
     response.raise_for_status()
